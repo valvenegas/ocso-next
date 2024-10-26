@@ -9,7 +9,6 @@ export default function LayoutDashboard({ children, count }: Readonly<{ children
             <div className= "flex flex-row items-center">
             <Sidebar/>
             {children}
-            {count}
             </div>
             
             </div>

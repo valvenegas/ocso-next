@@ -1,3 +1,6 @@
+import CountPage from "./count/page"
+
+
 export default function DashboardPage(){
     return (
         <>
@@ -5,6 +8,7 @@ export default function DashboardPage(){
         <p>hola soy section 1</p></div>
         <div className="h-full w-2/6 bg-red-100">
         <p>soy section 2</p></div>
+        <CountPage/>
         </>
     )
 }
