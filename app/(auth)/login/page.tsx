@@ -1,24 +1,34 @@
 'use client';
-import { Button, Input, Link } from "@nextui-org/react";
+import { Button, Input, Link, Spinner } from "@nextui-org/react";
 import { colgroup, form } from "framer-motion/client";
 import { API_URL } from "@/constants";
 import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 
 export default function LoginPage() {
-    const handleSubmit= async (e : React.FormEvent) =>{
+    const [submitting, setSubmitting] = useState(false)
+    const router = useRouter()
+    const handleSubmit = async (e: React.FormEvent) => {
+        setSubmitting(true);
         e.preventDefault()
         console.log(e);
-        const formData= new FormData();
+        const formData = new FormData();
         let authData: any = {}
         authData.userEmail = formData.get("userEmail");
         authData.userPassword = formData.get("userPassword")
-        const {data}= await axios.post(`${API_URL}/auth/login`, {
-            ...authData
-        }, {
-            withCredentials:true,
-        });
-        console.log(data);
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, {
+                ...authData
+            }, {
+                withCredentials: true,
+            });
+            if (response.status === 201) router.push('/dashbord');
+            setSubmitting(false);
+        } catch (e) {
+            setSubmitting(false);
+        }
         return;
     }
     return (
@@ -29,7 +39,7 @@ export default function LoginPage() {
                 <Input label="Contraseña" name="userPassword" type="password" isRequired={true} size="sm" />
             </div>
             <div className="flex flex-col items-center gap-2">
-                <Button color="primary">Iniciar sesión</Button>
+                <Button color="primary" type="submit" disabled={submitting}>{submitting ? "emviando...": "Iniciar sesión"}</Button>
                 <p className="text-white">¿No tienes una cuenta? <Link href="/signup">Registrate</Link></p>
             </div>
 

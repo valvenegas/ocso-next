@@ -1,14 +1,16 @@
-import CountPage from "./count/page"
+import EmployeesLocation from "./@locations/_components/EmployeesLocation"
 
 
-export default function DashboardPage(){
+
+export default function DashboardPage({searchParams}: { searchParams:{[key: string]: string| string[] | undefined}}){
     return (
         <>
-        <div className="h-full w-1/2 bg-red-100">
-        <p>hola soy section 1</p></div>
-        <div className="h-full w-2/6 bg-red-100">
-        <p>soy section 2</p></div>
-        <CountPage/>
+        <div className="h-full w-4/12">
+        <div className="h-[90vh]">
+        <EmployeesLocation store={searchParams?.store}/> 
+        </div>
+        </div>
+        
         </>
     )
 }
