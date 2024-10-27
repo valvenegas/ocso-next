@@ -7,7 +7,7 @@ export default function DashboardPage({searchParams}: { searchParams:{[key: stri
         <>
         <div className="h-full w-4/12">
         <div className="h-[90vh]">
-        <EmployeesLocation store={searchParams?.store}/> 
+        <EmployeesLocation store = {searchParams?.store}/> 
         </div>
         </div>
         
